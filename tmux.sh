@@ -1,7 +1,3 @@
-
-
-
-
 function _tls {
         tmux ls
 }
@@ -95,3 +91,26 @@ CONFIG
 }
 
 
+function _host_domain_complete {
+    local cur
+    COMPREPLY=()
+    cur=${COMP_WORDS[COMP_CWORD]}
+
+
+
+    echo $cur |  grep -P '^[\w-]+\.$' >/dev/null 2>&1
+    if [ $? -eq 0 ]
+    then
+        COMPREPLY=($( compgen -W "${COMP_WORDS[COMP_CWORD]}sjc02. ${COMP_WORDS[COMP_CWORD]}lax01. ${COMP_WORDS[COMP_CWORD]}sjc01. ${COMP_WORDS[COMP_CWORD]}lhr01. ${COMP_WORDS[COMP_CWORD]}sel01. ${COMP_WORDS[COMP_CWORD]}dfw01. ${COMP_WORDS[COMP_CWORD]}sfo01. ${COMP_WORDS[COMP_CWORD]}hkg01. ${COMP_WORDS[COMP_CWORD]}lhr02. ${COMP_WORDS[COMP_CWORD]}fra01. ${COMP_WORDS[COMP_CWORD]}tyo01. ${COMP_WORDS[COMP_CWORD]}ord02. ${COMP_WORDS[COMP_CWORD]}mia02. ${COMP_WORDS[COMP_CWORD]}ams01. ${COMP_WORDS[COMP_CWORD]}sea01. ${COMP_WORDS[COMP_CWORD]}sfo10. ${COMP_WORDS[COMP_CWORD]}cdg01. ${COMP_WORDS[COMP_CWORD]}prg01. ${COMP_WORDS[COMP_CWORD]}iad02. ${COMP_WORDS[COMP_CWORD]}arn01."))
+    fi
+
+    echo $cur |  grep -P '^[\w-]+\.\w{3}\d{2}\.$' >/dev/null 2>&1
+    if [ $? -eq 0 ]
+    then
+        COMPREPLY=($( compgen -W "${COMP_WORDS[COMP_CWORD]}justin.tv"))
+    fi
+
+
+}
+
+complete -F _host_domain_complete -o filenames assh ssh
